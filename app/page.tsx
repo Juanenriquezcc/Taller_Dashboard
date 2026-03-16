@@ -43,6 +43,7 @@ const integrations = [
 const days = [21, 22, 23, 24, 25];
 const conversionValue = 58.19;
 const conversionAngle = 180 - (conversionValue / 100) * 180;
+const needleAngle = conversionAngle - 2;
 
 function polarToCartesian(cx: number, cy: number, radius: number, angleInDegrees: number) {
   const angleInRadians = (angleInDegrees * Math.PI) / 180;
@@ -50,13 +51,6 @@ function polarToCartesian(cx: number, cy: number, radius: number, angleInDegrees
     x: cx + radius * Math.cos(angleInRadians),
     y: cy - radius * Math.sin(angleInRadians),
   };
-}
-
-function describeArc(cx: number, cy: number, radius: number, startAngle: number, endAngle: number) {
-  const start = polarToCartesian(cx, cy, radius, startAngle);
-  const end = polarToCartesian(cx, cy, radius, endAngle);
-  const largeArcFlag = Math.abs(endAngle - startAngle) <= 180 ? "0" : "1";
-  return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
 }
 
 type IconName =
@@ -543,8 +537,8 @@ export default function Home() {
 
             <article className="col-span-12 col-start-1 col-end-13 rounded-3xl border border-[#eceef7] bg-white p-5 lg:col-span-5 lg:col-start-8 lg:col-end-13">
               <h3 className="text-[18px] font-extrabold leading-none text-[#171d39]">Conversion</h3>
-              <div className="mt-3 flex justify-center">
-                <div className="relative h-50 w-80 overflow-hidden">
+              <div className="mt-2 flex justify-center">
+                <div className="relative h-48 w-80 overflow-hidden">
                   <svg viewBox="0 0 320 180" className="h-full w-full">
                     <defs>
                       <linearGradient id="conversionGradient" x1="40" y1="140" x2="280" y2="140" gradientUnits="userSpaceOnUse">
@@ -553,40 +547,42 @@ export default function Home() {
                       </linearGradient>
                     </defs>
                     <path
-                      d={describeArc(160, 140, 98, 180, 0)}
+                      d="M40 140 A120 120 0 0 1 280 140"
                       fill="none"
                       stroke="#e4e7f8"
                       strokeWidth="44"
                       strokeLinecap="butt"
                     />
                     <path
-                      d={describeArc(160, 140, 98, 180, conversionAngle)}
+                      d="M40 140 A120 120 0 0 1 280 140"
                       fill="none"
                       stroke="url(#conversionGradient)"
                       strokeWidth="44"
                       strokeLinecap="butt"
+                      pathLength={100}
+                      strokeDasharray={`${conversionValue} 100`}
                     />
                     <line
-                      x1={polarToCartesian(160, 140, 52, conversionAngle).x}
-                      y1={polarToCartesian(160, 140, 52, conversionAngle).y}
-                      x2={polarToCartesian(160, 140, 122, conversionAngle).x}
-                      y2={polarToCartesian(160, 140, 122, conversionAngle).y}
+                      x1={polarToCartesian(160, 140, 70, needleAngle).x}
+                      y1={polarToCartesian(160, 140, 70, needleAngle).y}
+                      x2={polarToCartesian(160, 140, 116, needleAngle).x}
+                      y2={polarToCartesian(160, 140, 116, needleAngle).y}
                       stroke="#9aa2e6"
                       strokeWidth="4"
                       strokeLinecap="round"
                     />
                   </svg>
-                  <div className="absolute inset-x-0 bottom-5 text-center">
-                    <p className="text-[52px] font-extrabold leading-none text-[#151b39]">
+                  <div className="absolute inset-x-0 bottom-3 flex flex-col items-center text-center">
+                    <p className="text-[44px] font-extrabold leading-none text-[#151b39]">
                       {conversionValue.toFixed(2).replace(".", ",")}%
                     </p>
                     <p className="text-sm font-bold text-[#20be77]">↑ 3.5%</p>
                   </div>
                 </div>
               </div>
-              <div className="mt-1 flex justify-between border-t border-[#eceef7] pt-4 text-sm font-semibold text-[#4e5678]">
-                <p className="flex items-center gap-1.5"><span className="text-[#20be77]"><Icon name="arrowUp" className="h-5 w-5" /></span>Income $542,317</p>
-                <p className="flex items-center gap-1.5"><span className="text-[#1b2143]"><Icon name="arrowDiag" className="h-5 w-5" /></span>Expences $497,456</p>
+              <div className="mt-2 flex justify-between pt-2 text-sm font-semibold text-[#4e5678]">
+                <p className="flex items-center gap-1.5"><span className="text-[#20be77]"><Icon name="arrowUp" className="h-4 w-4" /></span>Income $542,317</p>
+                <p className="flex items-center gap-1.5"><span className="text-[#1b2143]"><Icon name="arrowDiag" className="h-4 w-4" /></span>Expences $497,456</p>
               </div>
             </article>
             </section>
