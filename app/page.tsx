@@ -42,6 +42,7 @@ const integrations = [
 
 const days = [21, 22, 23, 24, 25];
 const conversionValue = 58.19;
+const conversionAngle = 180 - (conversionValue / 100) * 180;
 
 function polarToCartesian(cx: number, cy: number, radius: number, angleInDegrees: number) {
   const angleInRadians = (angleInDegrees * Math.PI) / 180;
@@ -515,7 +516,7 @@ export default function Home() {
               </div>
             </article>
 
-            <article className="relative col-span-12 col-start-1 col-end-13 min-h-44 overflow-hidden rounded-3xl bg-[linear-gradient(135deg,#4f47f5_0%,#3f38de_100%)] p-5 text-white lg:col-span-5 lg:col-start-8 lg:col-end-13">
+            <article className="relative col-span-12 col-start-1 col-end-13 min-h-40 overflow-hidden rounded-3xl bg-[linear-gradient(135deg,#4f47f5_0%,#3f38de_100%)] p-5 text-white lg:col-span-5 lg:col-start-8 lg:col-end-13">
               <div className="pointer-events-none absolute -right-8 top-5 h-36 w-36 rounded-full bg-white/10 blur-xl" />
               <div className="pointer-events-none absolute right-8 top-6 h-20 w-8 rounded-t-full border-[6px] border-b-0 border-white/92" />
               <div className="pointer-events-none absolute -bottom-2.5 right-8 h-28 w-9 rotate-10 rounded-t-full border-[6px] border-b-0 border-[#2b2a53]" />
@@ -527,11 +528,11 @@ export default function Home() {
               </div>
               <div className="pointer-events-none absolute bottom-10 right-30 h-2.5 w-6 rounded-full bg-white/85" />
               <div className="pointer-events-none absolute bottom-6 left-38 h-4 w-5 rounded-full bg-white/80 blur-[1px]" />
-              <h3 className="relative text-[42px] font-black leading-none">Need More Stats?</h3>
-              <p className="relative mt-2 text-[15px] font-semibold text-white/85">Upgrade to pro for added benefits.</p>
+              <h3 className="relative text-[34px] font-black leading-none">Need More Stats?</h3>
+              <p className="relative mt-2 text-[13px] font-semibold text-white/85">Upgrade to pro for added benefits.</p>
               <button
                 type="button"
-                className="relative mt-6 flex items-center gap-2 rounded-full bg-[#20c37f] px-6 py-2.5 font-bold text-white shadow-[0_10px_24px_rgba(34,196,128,0.35)]"
+                className="relative mt-5 flex items-center gap-2 rounded-full bg-[#20c37f] px-6 py-2 font-bold text-white shadow-[0_10px_24px_rgba(34,196,128,0.35)]"
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/80 text-xs">
                   <Icon name="arrowUp" className="h-3.5 w-3.5" />
@@ -543,7 +544,7 @@ export default function Home() {
             <article className="col-span-12 col-start-1 col-end-13 rounded-3xl border border-[#eceef7] bg-white p-5 lg:col-span-5 lg:col-start-8 lg:col-end-13">
               <h3 className="text-[18px] font-extrabold leading-none text-[#171d39]">Conversion</h3>
               <div className="mt-3 flex justify-center">
-                <div className="relative h-48 w-80 overflow-hidden">
+                <div className="relative h-50 w-80 overflow-hidden">
                   <svg viewBox="0 0 320 180" className="h-full w-full">
                     <defs>
                       <linearGradient id="conversionGradient" x1="40" y1="140" x2="280" y2="140" gradientUnits="userSpaceOnUse">
@@ -559,23 +560,23 @@ export default function Home() {
                       strokeLinecap="butt"
                     />
                     <path
-                      d={describeArc(160, 140, 98, 180, 180 - (conversionValue / 100) * 180)}
+                      d={describeArc(160, 140, 98, 180, conversionAngle)}
                       fill="none"
                       stroke="url(#conversionGradient)"
                       strokeWidth="44"
                       strokeLinecap="butt"
                     />
                     <line
-                      x1={polarToCartesian(160, 140, 40, 180 - (conversionValue / 100) * 180).x}
-                      y1={polarToCartesian(160, 140, 40, 180 - (conversionValue / 100) * 180).y}
-                      x2={polarToCartesian(160, 140, 112, 180 - (conversionValue / 100) * 180).x}
-                      y2={polarToCartesian(160, 140, 112, 180 - (conversionValue / 100) * 180).y}
+                      x1={polarToCartesian(160, 140, 52, conversionAngle).x}
+                      y1={polarToCartesian(160, 140, 52, conversionAngle).y}
+                      x2={polarToCartesian(160, 140, 122, conversionAngle).x}
+                      y2={polarToCartesian(160, 140, 122, conversionAngle).y}
                       stroke="#9aa2e6"
                       strokeWidth="4"
                       strokeLinecap="round"
                     />
                   </svg>
-                  <div className="absolute inset-x-0 bottom-6 text-center">
+                  <div className="absolute inset-x-0 bottom-5 text-center">
                     <p className="text-[52px] font-extrabold leading-none text-[#151b39]">
                       {conversionValue.toFixed(2).replace(".", ",")}%
                     </p>
