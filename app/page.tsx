@@ -42,16 +42,6 @@ const integrations = [
 
 const days = [21, 22, 23, 24, 25];
 const conversionValue = 58.19;
-const conversionAngle = 180 - (conversionValue / 100) * 180;
-const needleAngle = conversionAngle - 2;
-
-function polarToCartesian(cx: number, cy: number, radius: number, angleInDegrees: number) {
-  const angleInRadians = (angleInDegrees * Math.PI) / 180;
-  return {
-    x: cx + radius * Math.cos(angleInRadians),
-    y: cy - radius * Math.sin(angleInRadians),
-  };
-}
 
 type IconName =
   | MenuIcon
@@ -70,7 +60,7 @@ type IconName =
   | "arrowDiag";
 
 function Icon({ name, className }: { name: IconName; className?: string }) {
-  const base = className ?? "h-6 w-6";
+  const base = className ?? "h-5 w-5";
 
   if (name === "home") {
     return (
@@ -278,7 +268,7 @@ export default function Home() {
               >
                 <span className="flex basis-10/12 items-center gap-3">
                   <span className={`flex h-9 w-9 items-center justify-center rounded-lg ${item.active ? "bg-white/20" : "text-[#161e45]"}`}>
-                    <Icon name={item.icon} className="h-6 w-6" />
+                    <Icon name={item.icon} className="h-5 w-5" />
                   </span>
                   <span>{item.label}</span>
                 </span>
@@ -289,7 +279,7 @@ export default function Home() {
                     </span>
                   ) : item.chevron ? (
                     <span className="text-[#bbc2d8] group-hover:text-[#8f98bb]">
-                      <Icon name="chevronRight" className="h-4 w-4 rotate-90" />
+                      <Icon name="chevronRight" className="h-5 w-5 rotate-90" />
                     </span>
                   ) : (
                     <span className="h-3.5 w-3.5" />
@@ -308,7 +298,7 @@ export default function Home() {
                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[#29305b] transition hover:bg-[#f6f7fc]"
               >
                 <span className="text-[#3b4cf5]">
-                  <Icon name={tool.icon} className="h-6 w-6" />
+                  <Icon name={tool.icon} className="h-5 w-5" />
                 </span>
                 {tool.label}
               </button>
@@ -319,7 +309,7 @@ export default function Home() {
             type="button"
             className="mt-auto flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-semibold text-[#181f46] transition hover:bg-[#f6f7fc]"
           >
-            <Icon name="logout" className="h-6 w-6" />
+            <Icon name="logout" className="h-5 w-5" />
             Logout
           </button>
         </aside>
@@ -360,7 +350,7 @@ export default function Home() {
                 type="button"
                 className="relative mr-3 flex h-11 w-11 items-center justify-center rounded-full border border-[#e8ebf7] bg-white text-[#8f96b3]"
               >
-                <Icon name="bell" className="h-6 w-6" />
+                <Icon name="bell" className="h-5 w-5" />
                 <span className="absolute right-2 top-2 h-2 w-2 animate-pulse rounded-full bg-[#4c47f5]" />
               </button>
             </div>
@@ -380,7 +370,7 @@ export default function Home() {
               >
                 <Icon name="calendar" className="h-6 w-6" />
                 This Month
-                <Icon name="chevronRight" className="h-4 w-4 rotate-90" />
+                <Icon name="chevronRight" className="h-5 w-5 rotate-90" />
               </button>
               <button
                 type="button"
@@ -437,10 +427,12 @@ export default function Home() {
                     <p className="text-[50px] font-extrabold leading-none text-[#171d39]">68</p>
                   </div>
                 </div>
-                <div className="flex flex-col items-end gap-1 text-right">
-                  <p className="text-[30px] font-extrabold leading-none text-[#1eb574]">↑ 15.6%</p>
-                  <p className="text-[24px] font-extrabold leading-none text-[#4e4bf2]">26</p>
-                  <p className="text-sm font-bold text-[#f16c70]">↓ 1.6%</p>
+                <div className="flex items-center gap-3 text-right">
+                  <p className="text-[22px] font-extrabold leading-none text-[#4e4bf2]">26</p>
+                  <div className="flex flex-col items-end gap-1">
+                    <p className="text-[22px] font-bold leading-none text-[#1eb574]">↑ 15.6%</p>
+                    <p className="text-[22px] font-bold leading-none text-[#f16c70]">↓ 1.6%</p>
+                  </div>
                 </div>
               </div>
 
@@ -451,9 +443,9 @@ export default function Home() {
                     type="button"
                     className="flex items-center gap-1 rounded-full border border-[#e3e6f3] px-4 py-1.5 text-xs font-semibold text-[#8b93b4]"
                   >
-                    <Icon name="calendar" className="h-4 w-4" />
+                    <Icon name="calendar" className="h-5 w-5" />
                     February
-                    <Icon name="chevronRight" className="h-4 w-4 rotate-90" />
+                    <Icon name="chevronRight" className="h-5 w-5 rotate-90" />
                   </button>
                 </div>
 
@@ -484,7 +476,7 @@ export default function Home() {
                     type="button"
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e8ebf8] text-[#9ea5c1]"
                   >
-                    <Icon name="chevronLeft" className="h-4 w-4" />
+                    <Icon name="chevronLeft" className="h-5 w-5" />
                   </button>
                   <div className="flex gap-2">
                     {days.map((day) => (
@@ -504,7 +496,7 @@ export default function Home() {
                     type="button"
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e8ebf8] text-[#9ea5c1]"
                   >
-                    <Icon name="chevronRight" className="h-4 w-4" />
+                    <Icon name="chevronRight" className="h-5 w-5" />
                   </button>
                 </div>
               </div>
@@ -529,7 +521,7 @@ export default function Home() {
                 className="relative mt-5 flex items-center gap-2 rounded-full bg-[#20c37f] px-6 py-2 font-bold text-white shadow-[0_10px_24px_rgba(34,196,128,0.35)]"
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/80 text-xs">
-                  <Icon name="arrowUp" className="h-3.5 w-3.5" />
+                  <Icon name="arrowUp" className="h-4 w-4" />
                 </span>
                 Go Pro Now
               </button>
@@ -562,27 +554,18 @@ export default function Home() {
                       pathLength={100}
                       strokeDasharray={`${conversionValue} 100`}
                     />
-                    <line
-                      x1={polarToCartesian(160, 140, 70, needleAngle).x}
-                      y1={polarToCartesian(160, 140, 70, needleAngle).y}
-                      x2={polarToCartesian(160, 140, 116, needleAngle).x}
-                      y2={polarToCartesian(160, 140, 116, needleAngle).y}
-                      stroke="#9aa2e6"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                    />
                   </svg>
-                  <div className="absolute inset-x-0 bottom-3 flex flex-col items-center text-center">
+                  <div className="absolute inset-x-0 bottom-4 flex flex-col items-center text-center">
                     <p className="text-[44px] font-extrabold leading-none text-[#151b39]">
                       {conversionValue.toFixed(2).replace(".", ",")}%
                     </p>
-                    <p className="text-sm font-bold text-[#20be77]">↑ 3.5%</p>
+                    <p className="mt-1 text-sm font-bold text-[#20be77]">↑ 3.5%</p>
                   </div>
                 </div>
               </div>
               <div className="mt-2 flex justify-between pt-2 text-sm font-semibold text-[#4e5678]">
-                <p className="flex items-center gap-1.5"><span className="text-[#20be77]"><Icon name="arrowUp" className="h-4 w-4" /></span>Income $542,317</p>
-                <p className="flex items-center gap-1.5"><span className="text-[#1b2143]"><Icon name="arrowDiag" className="h-4 w-4" /></span>Expences $497,456</p>
+                <p className="flex items-center gap-1.5"><span className="text-[#20be77]"><Icon name="arrowUp" className="h-5 w-5" /></span>Income $542,317</p>
+                <p className="flex items-center gap-1.5"><span className="text-[#1b2143]"><Icon name="arrowDiag" className="h-5 w-5" /></span>Expences $497,456</p>
               </div>
             </article>
             </section>
